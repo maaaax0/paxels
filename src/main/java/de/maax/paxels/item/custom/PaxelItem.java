@@ -1,10 +1,8 @@
 package de.maax.paxels.item.custom;
 
-import net.minecraft.core.HolderGetter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -19,48 +17,46 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
 public class PaxelItem extends Item {
-    public PaxelItem(ToolMaterial material, float attackDamageModifier, float attackSpeedModifier, Item.Properties properties) {
+    private final Tier material;
+
+    public PaxelItem(Tier material, float attackDamageModifier, float attackSpeedModifier, Item.Properties properties) {
         super(properties
-                .durability(material.durability())
-                .repairable(material.repairItems())
-                .enchantable(material.enchantmentValue())
+                .durability(material.getUses())
                 .attributes(createAttributes(material, attackDamageModifier, attackSpeedModifier))
                 .component(DataComponents.TOOL, createPaxelTool(material))
         );
+        this.material = material;
     }
 
-    private static Tool createPaxelTool(ToolMaterial material) {
-        HolderGetter<Block> blocks = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-
+    private static Tool createPaxelTool(Tier material) {
         return new Tool(
                 List.of(
-                        Tool.Rule.deniesDrops(blocks.getOrThrow(material.incorrectBlocksForDrops())),
-                        Tool.Rule.minesAndDrops(blocks.getOrThrow(BlockTags.MINEABLE_WITH_PICKAXE), material.speed()),
-                        Tool.Rule.minesAndDrops(blocks.getOrThrow(BlockTags.MINEABLE_WITH_AXE), material.speed()),
-                        Tool.Rule.minesAndDrops(blocks.getOrThrow(BlockTags.MINEABLE_WITH_SHOVEL), material.speed())
+                        Tool.Rule.deniesDrops(material.getIncorrectBlocksForDrops()),
+                        Tool.Rule.minesAndDrops(BlockTags.MINEABLE_WITH_PICKAXE, material.getSpeed()),
+                        Tool.Rule.minesAndDrops(BlockTags.MINEABLE_WITH_AXE, material.getSpeed()),
+                        Tool.Rule.minesAndDrops(BlockTags.MINEABLE_WITH_SHOVEL, material.getSpeed())
                 ),
                 1.0F,
                 1
         );
     }
 
-    private static ItemAttributeModifiers createAttributes(ToolMaterial material, float attackDamage, float attackSpeed) {
+    private static ItemAttributeModifiers createAttributes(Tier material, float attackDamage, float attackSpeed) {
         return ItemAttributeModifiers.builder()
                 .add(
                         Attributes.ATTACK_DAMAGE,
-                        new AttributeModifier(BASE_ATTACK_DAMAGE_ID, attackDamage + material.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
+                        new AttributeModifier(BASE_ATTACK_DAMAGE_ID, attackDamage + material.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND
                 )
                 .add(
@@ -74,6 +70,16 @@ public class PaxelItem extends Item {
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         return true;
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return material.getEnchantmentValue();
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
+        return material.getRepairIngredient().test(repairCandidate);
     }
 
     @Override
@@ -188,7 +194,7 @@ public class PaxelItem extends Item {
     }
 
     private static BlockState getStrippedState(BlockState state) {
-        Block strippedBlock = AxeItem.STRIPPABLES.get(state.getBlock());
+        net.minecraft.world.level.block.Block strippedBlock = AxeItem.STRIPPABLES.get(state.getBlock());
         if (strippedBlock == null) {
             return null;
         }
