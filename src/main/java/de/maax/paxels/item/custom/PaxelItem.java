@@ -51,7 +51,7 @@ public class PaxelItem extends Item {
                 ),
                 1.0F,
                 1,
-                false
+                true
         );
     }
 
