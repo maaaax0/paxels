@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'fabric-loom' version '1.15.2'
+    id 'net.fabricmc.fabric-loom' version '1.16-SNAPSHOT'
     id 'idea'
 }
 
@@ -18,8 +18,7 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+    implementation "net.fabricmc:fabric-loader:${loader_version}"
 }
 
 loom {
@@ -40,13 +39,9 @@ tasks.named('jar', Jar).configure {
     archiveFileName = "${mod_id}-${mod_version}-fabric-${minecraft_version}.jar"
 }
 
-tasks.named('remapJar').configure {
-    archiveFileName = "${mod_id}-${mod_version}-fabric-${minecraft_version}.jar"
-}
-
 tasks.register('copyReleaseJar', Copy) {
-    dependsOn tasks.named('remapJar')
-    from(tasks.named('remapJar').flatMap { it.archiveFile })
+    dependsOn tasks.named('jar')
+    from(tasks.named('jar').flatMap { it.archiveFile })
     into(layout.projectDirectory.dir("release-jars/fabric/${mod_version}"))
 }
 
@@ -64,6 +59,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_version      : mod_version,
             mod_authors      : mod_authors,
             mod_description  : mod_description,
+            target_java_version: targetJavaVersion,
     ]
     inputs.properties replaceProperties
 
@@ -87,6 +83,7 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    options.release = targetJavaVersion
 }
 
 idea {
