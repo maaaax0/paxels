@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/upgrade_tools",
+  "display": {
+    "icon": {
+      "id": "paxels:stone_paxel"
+    },
+    "title": {
+      "translate": "advancements.paxels.story.stone_paxel.title"
+    },
+    "description": {
+      "translate": "advancements.paxels.story.stone_paxel.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stone_paxel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "paxels:stone_paxel"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stone_paxel"
+    ]
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "paxels:wooden_paxel",
+    "paxels:stone_paxel",
+    "paxels:golden_paxel",
+    "paxels:iron_paxel",
+    "paxels:diamond_paxel",
+    "paxels:netherite_paxel"
+  ]
+}

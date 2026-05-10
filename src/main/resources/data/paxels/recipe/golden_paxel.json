@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YCV",
+    " O ",
+    " O "
+  ],
+  "key": {
+    "Y": {
+      "item": "minecraft:golden_axe"
+    },
+    "C": {
+      "item": "minecraft:golden_shovel"
+    },
+    "V": {
+      "item": "minecraft:golden_pickaxe"
+    },
+    "O": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "paxels:golden_paxel",
+    "count": 1
+  }
+}

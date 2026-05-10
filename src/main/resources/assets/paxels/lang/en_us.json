@@ -1,0 +1,19 @@
+{
+  "itemGroup.paxels": "Paxels",
+
+  "item.paxels.wooden_paxel": "Wooden Paxel",
+  "item.paxels.stone_paxel": "Stone Paxel",
+  "item.paxels.golden_paxel": "Golden Paxel",
+  "item.paxels.iron_paxel": "Iron Paxel",
+  "item.paxels.diamond_paxel": "Diamond Paxel",
+  "item.paxels.netherite_paxel": "Netherite Paxel",
+
+  "advancements.paxels.story.stone_paxel.title": "All-in-Stone",
+  "advancements.paxels.story.stone_paxel.description": "Craft a Stone Paxel",
+  "advancements.paxels.story.iron_paxel.title": "Three Tools, One Handle",
+  "advancements.paxels.story.iron_paxel.description": "Craft an Iron Paxel",
+  "advancements.paxels.story.diamond_paxel.title": "Compressed Utility",
+  "advancements.paxels.story.diamond_paxel.description": "Craft a Diamond Paxel",
+  "advancements.paxels.story.netherite_paxel.title": "One Tool to Rule Them All",
+  "advancements.paxels.story.netherite_paxel.description": "Upgrade your Diamond Paxel to Netherite"
+}
