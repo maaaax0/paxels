@@ -21,6 +21,9 @@ public class ModItems {
     public static final DeferredItem<Item> GOLDEN_PAXEL =
             registerPaxel("golden_paxel", ToolMaterial.GOLD, 7.0F, -2.8F);
 
+    public static final DeferredItem<Item> COPPER_PAXEL =
+            registerPaxel("copper_paxel", ToolMaterial.COPPER, 7.0F, -2.9F);
+
     public static final DeferredItem<Item> IRON_PAXEL =
             registerPaxel("iron_paxel", ToolMaterial.IRON, 7.0F, -2.9F);
 
