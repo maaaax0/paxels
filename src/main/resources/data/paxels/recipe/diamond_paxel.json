@@ -6,18 +6,10 @@
     " O "
   ],
   "key": {
-    "Y": {
-      "item": "minecraft:diamond_axe"
-    },
-    "C": {
-      "item": "minecraft:diamond_shovel"
-    },
-    "V": {
-      "item": "minecraft:diamond_pickaxe"
-    },
-    "O": {
-      "item": "minecraft:stick"
-    }
+    "Y": "minecraft:diamond_axe",
+    "C": "minecraft:diamond_shovel",
+    "V": "minecraft:diamond_pickaxe",
+    "O": "minecraft:stick"
   },
   "result": {
     "id": "paxels:diamond_paxel",

@@ -6,18 +6,10 @@
     " O "
   ],
   "key": {
-    "Y": {
-      "item": "minecraft:stone_axe"
-    },
-    "C": {
-      "item": "minecraft:stone_shovel"
-    },
-    "V": {
-      "item": "minecraft:stone_pickaxe"
-    },
-    "O": {
-      "item": "minecraft:stick"
-    }
+    "Y": "minecraft:stone_axe",
+    "C": "minecraft:stone_shovel",
+    "V": "minecraft:stone_pickaxe",
+    "O": "minecraft:stick"
   },
   "result": {
     "id": "paxels:stone_paxel",

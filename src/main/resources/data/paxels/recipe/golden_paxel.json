@@ -6,18 +6,10 @@
     " O "
   ],
   "key": {
-    "Y": {
-      "item": "minecraft:golden_axe"
-    },
-    "C": {
-      "item": "minecraft:golden_shovel"
-    },
-    "V": {
-      "item": "minecraft:golden_pickaxe"
-    },
-    "O": {
-      "item": "minecraft:stick"
-    }
+    "Y": "minecraft:golden_axe",
+    "C": "minecraft:golden_shovel",
+    "V": "minecraft:golden_pickaxe",
+    "O": "minecraft:stick"
   },
   "result": {
     "id": "paxels:golden_paxel",

@@ -6,18 +6,10 @@
     " O "
   ],
   "key": {
-    "Y": {
-      "item": "minecraft:copper_axe"
-    },
-    "C": {
-      "item": "minecraft:copper_shovel"
-    },
-    "V": {
-      "item": "minecraft:copper_pickaxe"
-    },
-    "O": {
-      "item": "minecraft:stick"
-    }
+    "Y": "minecraft:copper_axe",
+    "C": "minecraft:copper_shovel",
+    "V": "minecraft:copper_pickaxe",
+    "O": "minecraft:stick"
   },
   "result": {
     "id": "paxels:copper_paxel",
