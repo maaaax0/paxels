@@ -4,18 +4,10 @@ import de.maax.paxels.SimplePaxels;
 import de.maax.paxels.item.custom.PaxelItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 
 public class ModItems {
-    private static final TagKey<Item> COPPER_TOOL_MATERIALS =
-            TagKey.create(Registries.ITEM, SimplePaxels.id("copper_tool_materials"));
-    private static final ToolMaterial COPPER_MATERIAL =
-            new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 190, 5.0F, 1.0F, 13, COPPER_TOOL_MATERIALS);
-
     public static final Item WOODEN_PAXEL =
             registerPaxel("wooden_paxel", ToolMaterial.WOOD, 7.0F, -3.0F);
 
@@ -24,9 +16,6 @@ public class ModItems {
 
     public static final Item GOLDEN_PAXEL =
             registerPaxel("golden_paxel", ToolMaterial.GOLD, 7.0F, -2.8F);
-
-    public static final Item COPPER_PAXEL =
-            registerPaxel("copper_paxel", COPPER_MATERIAL, 7.0F, -2.9F);
 
     public static final Item IRON_PAXEL =
             registerPaxel("iron_paxel", ToolMaterial.IRON, 7.0F, -2.9F);
@@ -45,12 +34,7 @@ public class ModItems {
                         material,
                         attackDamageModifier,
                         attackSpeedModifier,
-                        new Item.Properties().setId(
-                                net.minecraft.resources.ResourceKey.create(
-                                        net.minecraft.core.registries.Registries.ITEM,
-                                        SimplePaxels.id(name)
-                                )
-                        )
+                        new Item.Properties()
                 )
         );
     }

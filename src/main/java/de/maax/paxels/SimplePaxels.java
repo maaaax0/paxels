@@ -21,7 +21,6 @@ public class SimplePaxels implements ModInitializer {
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.WOODEN_PAXEL);
                 output.accept(ModItems.STONE_PAXEL);
-                output.accept(ModItems.COPPER_PAXEL);
                 output.accept(ModItems.IRON_PAXEL);
                 output.accept(ModItems.GOLDEN_PAXEL);
                 output.accept(ModItems.DIAMOND_PAXEL);

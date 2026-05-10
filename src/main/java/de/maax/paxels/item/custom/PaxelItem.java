@@ -14,12 +14,12 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.context.UseOnContext;
@@ -52,8 +52,7 @@ public class PaxelItem extends Item {
                         Tool.Rule.minesAndDrops(blocks.getOrThrow(BlockTags.MINEABLE_WITH_SHOVEL), material.speed())
                 ),
                 1.0F,
-                1,
-                true
+                1
         );
     }
 
@@ -73,7 +72,8 @@ public class PaxelItem extends Item {
     }
 
     @Override
-    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        return true;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class PaxelItem extends Item {
         boolean canModifyGround = level.getBlockState(clickedPos.above()).isAir();
 
         if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown() && till(context, clickedState, canModifyGround)) {
-            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS;
         }
 
         BlockState flattenedState = getFlattenedState(clickedState, canModifyGround);
@@ -121,7 +121,7 @@ public class PaxelItem extends Item {
                 }
             }
 
-            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS;
         }
 
         BlockState strippedState = getStrippedState(clickedState);
@@ -148,7 +148,7 @@ public class PaxelItem extends Item {
                 }
             }
 
-            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;
