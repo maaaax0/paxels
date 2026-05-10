@@ -13,6 +13,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -70,7 +71,7 @@ public class PaxelItem extends Item {
                 .build();
     }
 
-    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+    public boolean canPerformAction(ItemInstance item, ItemAbility itemAbility) {
         return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility)
                 || ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility)
                 || itemAbility == ItemAbilities.SWORD_SWEEP
