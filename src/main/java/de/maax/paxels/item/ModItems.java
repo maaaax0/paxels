@@ -31,12 +31,12 @@ public class ModItems {
             registerPaxel("netherite_paxel", ToolMaterial.NETHERITE, 6.0F, -2.8F);
 
     private static DeferredItem<Item> registerPaxel(String name, ToolMaterial material, float attackDamageModifier, float attackSpeedModifier) {
-        return ITEMS.register(name,
-                () -> new PaxelItem(
+        return ITEMS.registerItem(name,
+                properties -> new PaxelItem(
                         material,
                         attackDamageModifier,
                         attackSpeedModifier,
-                        new Item.Properties()
+                        properties
                 )
         );
     }
@@ -45,3 +45,4 @@ public class ModItems {
         ITEMS.register(eventBus);
     }
 }
+
