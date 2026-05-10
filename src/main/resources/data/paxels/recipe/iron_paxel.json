@@ -1,26 +1,18 @@
-{
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "YCV",
-    " O ",
-    " O "
-  ],
-  "key": {
-    "Y": {
-      "item": "minecraft:iron_axe"
-    },
-    "C": {
-      "item": "minecraft:iron_shovel"
-    },
-    "V": {
-      "item": "minecraft:iron_pickaxe"
-    },
-    "O": {
-      "item": "minecraft:stick"
-    }
-  },
-  "result": {
-    "id": "paxels:iron_paxel",
-    "count": 1
-  }
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "pattern":  [
+                    "YCV",
+                    " O ",
+                    " O "
+                ],
+    "key":  {
+                "Y":  "minecraft:iron_axe",
+                "C":  "minecraft:iron_shovel",
+                "V":  "minecraft:iron_pickaxe",
+                "O":  "minecraft:stick"
+            },
+    "result":  {
+                   "id":  "paxels:iron_paxel",
+                   "count":  1
+               }
 }
