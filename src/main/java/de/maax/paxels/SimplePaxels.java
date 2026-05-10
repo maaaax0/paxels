@@ -24,9 +24,9 @@ public class SimplePaxels {
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.WOODEN_PAXEL.get());
                         output.accept(ModItems.STONE_PAXEL.get());
-                        output.accept(ModItems.GOLDEN_PAXEL.get());
                         output.accept(ModItems.COPPER_PAXEL.get());
                         output.accept(ModItems.IRON_PAXEL.get());
+                        output.accept(ModItems.GOLDEN_PAXEL.get());
                         output.accept(ModItems.DIAMOND_PAXEL.get());
                         output.accept(ModItems.NETHERITE_PAXEL.get());
                     })
