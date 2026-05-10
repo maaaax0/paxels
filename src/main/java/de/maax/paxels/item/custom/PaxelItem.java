@@ -50,7 +50,8 @@ public class PaxelItem extends Item {
                         Tool.Rule.minesAndDrops(blocks.getOrThrow(BlockTags.MINEABLE_WITH_SHOVEL), material.speed())
                 ),
                 1.0F,
-                1
+                1,
+                false
         );
     }
 
@@ -69,19 +70,16 @@ public class PaxelItem extends Item {
                 .build();
     }
 
-    @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
-        return ItemAbilities.DEFAULT_PICKAXE_ACTIONS.contains(itemAbility)
-                || ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility)
+        return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility)
                 || ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility)
-                || ItemAbilities.DEFAULT_SWORD_ACTIONS.contains(itemAbility)
+                || itemAbility == ItemAbilities.SWORD_SWEEP
                 || itemAbility == ItemAbilities.AXE_STRIP
                 || itemAbility == ItemAbilities.HOE_TILL;
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return true;
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
     }
 
     @Override
@@ -115,7 +113,7 @@ public class PaxelItem extends Item {
                     1.0F
             );
 
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 level.setBlock(clickedPos, modifiedState, 11);
 
                 if (context.getPlayer() != null) {
@@ -127,7 +125,7 @@ public class PaxelItem extends Item {
                 }
             }
 
-            return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }
 
         BlockState strippedState = clickedState.getToolModifiedState(context, ItemAbilities.AXE_STRIP, false);
@@ -142,7 +140,7 @@ public class PaxelItem extends Item {
                     1.0F
             );
 
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 level.setBlock(clickedPos, strippedState, 11);
 
                 if (context.getPlayer() != null) {
@@ -154,7 +152,7 @@ public class PaxelItem extends Item {
                 }
             }
 
-            return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }
 
         return InteractionResult.PASS;
