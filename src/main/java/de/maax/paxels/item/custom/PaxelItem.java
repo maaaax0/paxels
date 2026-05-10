@@ -17,14 +17,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
@@ -70,14 +72,6 @@ public class PaxelItem extends Item {
                 .build();
     }
 
-    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
-        return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility)
-                || ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility)
-                || itemAbility == ItemAbilities.SWORD_SWEEP
-                || itemAbility == ItemAbilities.AXE_STRIP
-                || itemAbility == ItemAbilities.HOE_TILL;
-    }
-
     @Override
     public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
     }
@@ -97,24 +91,26 @@ public class PaxelItem extends Item {
             return InteractionResult.PASS;
         }
 
-        ItemAbility action = context.getPlayer() != null && context.getPlayer().isShiftKeyDown()
-                ? ItemAbilities.HOE_TILL
-                : ItemAbilities.SHOVEL_FLATTEN;
+        boolean canModifyGround = level.getBlockState(clickedPos.above()).isAir();
 
-        BlockState modifiedState = clickedState.getToolModifiedState(context, action, false);
+        if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown() && till(context, clickedState, canModifyGround)) {
+            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+        }
 
-        if (modifiedState != null && level.getBlockState(clickedPos.above()).isAir()) {
+        BlockState flattenedState = getFlattenedState(clickedState, canModifyGround);
+
+        if (flattenedState != null) {
             level.playSound(
                     context.getPlayer(),
                     clickedPos,
-                    action == ItemAbilities.HOE_TILL ? SoundEvents.HOE_TILL : SoundEvents.SHOVEL_FLATTEN,
+                    SoundEvents.SHOVEL_FLATTEN,
                     SoundSource.BLOCKS,
                     1.0F,
                     1.0F
             );
 
             if (!level.isClientSide()) {
-                level.setBlock(clickedPos, modifiedState, 11);
+                level.setBlock(clickedPos, flattenedState, 11);
 
                 if (context.getPlayer() != null) {
                     context.getItemInHand().hurtAndBreak(
@@ -128,7 +124,7 @@ public class PaxelItem extends Item {
             return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }
 
-        BlockState strippedState = clickedState.getToolModifiedState(context, ItemAbilities.AXE_STRIP, false);
+        BlockState strippedState = getStrippedState(clickedState);
 
         if (strippedState != null) {
             level.playSound(
@@ -156,5 +152,52 @@ public class PaxelItem extends Item {
         }
 
         return InteractionResult.PASS;
+    }
+
+    private static BlockState getFlattenedState(BlockState state, boolean canModifyGround) {
+        return canModifyGround ? ShovelItem.FLATTENABLES.get(state.getBlock()) : null;
+    }
+
+    private static boolean till(UseOnContext context, BlockState state, boolean canModifyGround) {
+        if (!canModifyGround) {
+            return false;
+        }
+
+        var tillingAction = HoeItem.TILLABLES.get(state.getBlock());
+        if (tillingAction == null || !tillingAction.getFirst().test(context)) {
+            return false;
+        }
+
+        Level level = context.getLevel();
+        BlockPos clickedPos = context.getClickedPos();
+        level.playSound(context.getPlayer(), clickedPos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+        if (!level.isClientSide()) {
+            tillingAction.getSecond().accept(context);
+
+            if (context.getPlayer() != null) {
+                context.getItemInHand().hurtAndBreak(
+                        1,
+                        context.getPlayer(),
+                        context.getPlayer().getEquipmentSlotForItem(context.getItemInHand())
+                );
+            }
+        }
+
+        return true;
+    }
+
+    private static BlockState getStrippedState(BlockState state) {
+        Block strippedBlock = AxeItem.STRIPPABLES.get(state.getBlock());
+        if (strippedBlock == null) {
+            return null;
+        }
+
+        BlockState strippedState = strippedBlock.defaultBlockState();
+        if (state.hasProperty(BlockStateProperties.AXIS) && strippedState.hasProperty(BlockStateProperties.AXIS)) {
+            strippedState = strippedState.setValue(BlockStateProperties.AXIS, state.getValue(BlockStateProperties.AXIS));
+        }
+
+        return strippedState;
     }
 }

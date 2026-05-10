@@ -1,39 +1,45 @@
 package de.maax.paxels;
 
 import de.maax.paxels.item.ModItems;
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
-@Mod(SimplePaxels.MODID)
-public class SimplePaxels {
+public class SimplePaxels implements ModInitializer {
     public static final String MODID = "paxels";
 
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+    public static final ResourceKey<CreativeModeTab> PAXELS_TAB_KEY =
+            ResourceKey.create(Registries.CREATIVE_MODE_TAB, id("paxels_tab"));
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> PAXELS_TAB =
-            CREATIVE_MODE_TABS.register("paxels_tab", () -> CreativeModeTab.builder()
-                    .title(Component.translatable("itemGroup.paxels"))
-                    .icon(() -> new ItemStack(ModItems.NETHERITE_PAXEL.get()))
-                    .displayItems((parameters, output) -> {
-                        output.accept(ModItems.WOODEN_PAXEL.get());
-                        output.accept(ModItems.STONE_PAXEL.get());
-                        output.accept(ModItems.COPPER_PAXEL.get());
-                        output.accept(ModItems.IRON_PAXEL.get());
-                        output.accept(ModItems.GOLDEN_PAXEL.get());
-                        output.accept(ModItems.DIAMOND_PAXEL.get());
-                        output.accept(ModItems.NETHERITE_PAXEL.get());
-                    })
-                    .build());
+    public static final CreativeModeTab PAXELS_TAB = CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+            .title(Component.translatable("itemGroup.paxels"))
+            .icon(() -> new ItemStack(ModItems.NETHERITE_PAXEL))
+            .displayItems((parameters, output) -> {
+                output.accept(ModItems.WOODEN_PAXEL);
+                output.accept(ModItems.STONE_PAXEL);
+                output.accept(ModItems.COPPER_PAXEL);
+                output.accept(ModItems.IRON_PAXEL);
+                output.accept(ModItems.GOLDEN_PAXEL);
+                output.accept(ModItems.DIAMOND_PAXEL);
+                output.accept(ModItems.NETHERITE_PAXEL);
+            })
+            .build();
 
-    public SimplePaxels(IEventBus modEventBus) {
-        ModItems.register(modEventBus);
-        CREATIVE_MODE_TABS.register(modEventBus);
+    @Override
+    public void onInitialize() {
+        ModItems.register();
+        net.minecraft.core.Registry.register(
+                net.minecraft.core.registries.BuiltInRegistries.CREATIVE_MODE_TAB,
+                PAXELS_TAB_KEY,
+                PAXELS_TAB
+        );
+    }
+
+    public static Identifier id(String path) {
+        return Identifier.fromNamespaceAndPath(MODID, path);
     }
 }
