@@ -5,7 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
@@ -39,7 +39,7 @@ public class SimplePaxels implements ModInitializer {
         );
     }
 
-    public static Identifier id(String path) {
-        return Identifier.fromNamespaceAndPath(MODID, path);
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }
