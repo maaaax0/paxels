@@ -1,18 +1,18 @@
-{
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "YCV",
-    " O ",
-    " O "
-  ],
-  "key": {
-    "Y": "minecraft:diamond_axe",
-    "C": "minecraft:diamond_shovel",
-    "V": "minecraft:diamond_pickaxe",
-    "O": "minecraft:stick"
-  },
-  "result": {
-    "id": "paxels:diamond_paxel",
-    "count": 1
-  }
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "pattern":  [
+                    "YCV",
+                    " O ",
+                    " O "
+                ],
+    "key":  {
+                "Y":  "minecraft:diamond_axe",
+                "C":  "minecraft:diamond_shovel",
+                "V":  "minecraft:diamond_pickaxe",
+                "O":  "minecraft:stick"
+            },
+    "result":  {
+                   "id":  "paxels:diamond_paxel",
+                   "count":  1
+               }
 }

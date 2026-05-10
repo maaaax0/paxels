@@ -1,18 +1,18 @@
-{
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "YCV",
-    " O ",
-    " O "
-  ],
-  "key": {
-    "Y": "minecraft:golden_axe",
-    "C": "minecraft:golden_shovel",
-    "V": "minecraft:golden_pickaxe",
-    "O": "minecraft:stick"
-  },
-  "result": {
-    "id": "paxels:golden_paxel",
-    "count": 1
-  }
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "pattern":  [
+                    "YCV",
+                    " O ",
+                    " O "
+                ],
+    "key":  {
+                "Y":  "minecraft:golden_axe",
+                "C":  "minecraft:golden_shovel",
+                "V":  "minecraft:golden_pickaxe",
+                "O":  "minecraft:stick"
+            },
+    "result":  {
+                   "id":  "paxels:golden_paxel",
+                   "count":  1
+               }
 }

@@ -1,10 +1,10 @@
-{
-  "type": "minecraft:smithing_transform",
-  "template": "minecraft:netherite_upgrade_smithing_template",
-  "base": "paxels:diamond_paxel",
-  "addition": "minecraft:netherite_ingot",
-  "result": {
-    "id": "paxels:netherite_paxel",
-    "count": 1
-  }
+﻿{
+    "type":  "minecraft:smithing_transform",
+    "template":  "minecraft:netherite_upgrade_smithing_template",
+    "base":  "paxels:diamond_paxel",
+    "addition":  "minecraft:netherite_ingot",
+    "result":  {
+                   "id":  "paxels:netherite_paxel",
+                   "count":  1
+               }
 }
