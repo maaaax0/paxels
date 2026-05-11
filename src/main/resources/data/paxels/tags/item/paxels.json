@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "paxels:wooden_paxel",
+      "required": false
+    },
+    {
+      "id": "paxels:stone_paxel",
+      "required": false
+    },
+    {
+      "id": "paxels:golden_paxel",
+      "required": false
+    },
+    {
+      "id": "paxels:copper_paxel",
+      "required": false
+    },
+    {
+      "id": "paxels:iron_paxel",
+      "required": false
+    },
+    {
+      "id": "paxels:diamond_paxel",
+      "required": false
+    },
+    {
+      "id": "paxels:netherite_paxel",
+      "required": false
+    }
+  ]
+}
