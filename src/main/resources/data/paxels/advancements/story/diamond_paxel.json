@@ -1,0 +1,37 @@
+{
+  "parent": "paxels:story/iron_paxel",
+  "display": {
+    "icon": {
+      "item": "paxels:diamond_paxel"
+    },
+    "title": {
+      "translate": "advancements.paxels.story.diamond_paxel.title"
+    },
+    "description": {
+      "translate": "advancements.paxels.story.diamond_paxel.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "diamond_paxel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paxels:diamond_paxel"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "diamond_paxel"
+    ]
+  ]
+}

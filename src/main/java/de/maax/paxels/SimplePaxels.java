@@ -39,6 +39,6 @@ public class SimplePaxels implements ModInitializer {
     }
 
     public static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+        return new ResourceLocation(MODID, path);
     }
 }

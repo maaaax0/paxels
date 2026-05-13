@@ -1,0 +1,40 @@
+{
+  "parent": "paxels:story/diamond_paxel",
+  "display": {
+    "icon": {
+      "item": "paxels:netherite_paxel"
+    },
+    "title": {
+      "translate": "advancements.paxels.story.netherite_paxel.title"
+    },
+    "description": {
+      "translate": "advancements.paxels.story.netherite_paxel.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "netherite_paxel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paxels:netherite_paxel"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "netherite_paxel"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}
